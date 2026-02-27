@@ -15,7 +15,7 @@ const SingleBlog = () => {
     const checkPurchase = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/orders/mycourses",
+          "https://masstudy.onrender.com/orders/mycourses",
           { withCredentials: true },
         );
 
@@ -45,7 +45,7 @@ const SingleBlog = () => {
           {/* LEFT SIDE IMAGE */}
           <div className="rounded-2xl overflow-hidden shadow-md">
             <img
-              src={`http://localhost:5000/images/${blog.image}`}
+              src={`https://masstudy.onrender.com/images/${blog.image}`}
               alt={blog.title}
               className="w-full h-100 object-cover hover:scale-105 transition duration-500"
             />
