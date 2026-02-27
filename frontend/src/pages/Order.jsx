@@ -21,7 +21,7 @@ const Order = () => {
     const checkPurchase = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/orders/mycourses",
+          "https://masstudy.onrender.com/orders/mycourses",
           { withCredentials: true }
         );
 
@@ -53,7 +53,7 @@ const Order = () => {
   const handlePayment = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/orders/create",
+        "https://masstudy.onrender.com/orders/create",
         { courseId: blog._id },
         { withCredentials: true }
       );
@@ -68,7 +68,7 @@ const Order = () => {
 
         handler: async function (response) {
           await axios.post(
-            "http://localhost:5000/orders/verify",
+            "https://masstudy.onrender.com/orders/verify",
             {
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_order_id: response.razorpay_order_id,
