@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+#nprogress .bar {
+  background: #ff4d00 !important;   
+  height: 5px !important;
+}
+
+#nprogress .spinner {
+  display: none;
+}
+
+@keyframes progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.animate-progress {
+  animation: progress linear forwards;
+}
