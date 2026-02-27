@@ -6,7 +6,7 @@ const Blogs = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
+  const API_BASE = import.meta.env.VITE_API_BASE || "https://masstudy.onrender.com";
 
   useEffect(() => {
     const fetchLiveCourse = async () => {
