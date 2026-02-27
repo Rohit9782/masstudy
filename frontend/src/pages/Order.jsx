@@ -14,7 +14,9 @@ const Order = () => {
 
   const token = localStorage.getItem("token");
 
-  /* FETCH SINGLE COURSE */
+  /* =========================
+     FETCH SINGLE COURSE
+  ========================= */
   useEffect(() => {
     const fetchBlog = async () => {
       try {
@@ -22,9 +24,7 @@ const Order = () => {
           `https://masstudy.onrender.com/blog/${id}`
         );
 
-        console.log("Blog Data:", data);
-
-        if (data.blog) {
+        if (data.success) {
           setBlog(data.blog);
         }
       } catch (error) {
@@ -37,14 +37,18 @@ const Order = () => {
     fetchBlog();
   }, [id]);
 
-  /* CHECK PURCHASE */
+  /* =========================
+     CHECK IF ALREADY PURCHASED
+  ========================= */
   useEffect(() => {
     const checkPurchase = async () => {
       try {
         const { data } = await axios.get(
           "https://masstudy.onrender.com/orders/mycourses",
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
 
@@ -54,15 +58,22 @@ const Order = () => {
             order.status === "Paid"
         );
 
-        setPurchased(isPurchased);
+        if (isPurchased) {
+          setPurchased(true);
+        }
       } catch (error) {
         console.log(error);
       }
     };
 
-    if (token) checkPurchase();
+    if (token) {
+      checkPurchase();
+    }
   }, [id, token]);
 
+  /* =========================
+     HANDLE PAYMENT
+  ========================= */
   const handlePayment = async () => {
     try {
       if (!token) {
@@ -75,7 +86,11 @@ const Order = () => {
       const { data } = await axios.post(
         "https://masstudy.onrender.com/orders/create",
         { courseId: blog._id },
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       const options = {
@@ -85,6 +100,7 @@ const Order = () => {
         name: blog.title,
         description: "Course Purchase",
         order_id: data.order.id,
+
         handler: async function (response) {
           await axios.post(
             "https://masstudy.onrender.com/orders/verify",
@@ -93,11 +109,19 @@ const Order = () => {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_signature: response.razorpay_signature,
             },
-            { headers: { Authorization: `Bearer ${token}` } }
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
           );
 
           toast.success("Payment Successful 🎉");
           navigate("/");
+        },
+
+        theme: {
+          color: "#2563eb",
         },
       };
 
@@ -107,7 +131,16 @@ const Order = () => {
       setProcessing(false);
     } catch (error) {
       setProcessing(false);
-      toast.error("Payment failed");
+
+      if (
+        error.response?.data?.message ===
+        "You have already purchased this course"
+      ) {
+        toast.info("You already purchased this course");
+        navigate("/");
+      } else {
+        toast.error("Payment failed");
+      }
     }
   };
 
@@ -129,21 +162,12 @@ const Order = () => {
 
       <div className="grid md:grid-cols-2 gap-10">
 
-        {/* LEFT */}
+        {/* LEFT SIDE */}
         <div className="border p-6 rounded-2xl shadow-lg bg-white">
-
           <img
-            src={
-              blog.image
-                ? `https://masstudy.onrender.com/images/${blog.image}`
-                : "https://via.placeholder.com/500x300?text=No+Image"
-            }
+            src={`https://masstudy.onrender.com/images/${blog.image}`}
             alt={blog.title}
             className="w-full h-60 object-cover rounded-xl"
-            onError={(e) =>
-              (e.target.src =
-                "https://via.placeholder.com/500x300?text=Image+Not+Found")
-            }
           />
 
           <h3 className="text-2xl font-semibold mt-6">
@@ -153,9 +177,16 @@ const Order = () => {
           <p className="text-gray-600 mt-3">
             {blog.description}
           </p>
+
+          <div className="mt-6 space-y-2 text-sm text-gray-500">
+            <p>✔ Lifetime Access</p>
+            <p>✔ Certificate of Completion</p>
+            <p>✔ 24/7 Support</p>
+            <p>✔ Access on Mobile & Desktop</p>
+          </div>
         </div>
 
-        {/* RIGHT */}
+        {/* RIGHT SIDE */}
         <div className="border p-6 rounded-2xl shadow-lg bg-white h-fit">
 
           <h3 className="text-xl font-semibold mb-6">
@@ -194,7 +225,18 @@ const Order = () => {
               ? "Processing..."
               : purchased
               ? "Already Purchased"
-              : "ROhit dharma"}
+              : "Proceed to Secure Payment"}
+          </button>
+
+          <p className="text-xs text-gray-500 mt-4 text-center">
+            🔒 100% Secure Payment via Razorpay
+          </p>
+
+          <button
+            onClick={() => navigate(-1)}
+            className="w-full mt-4 py-2 border rounded-lg hover:bg-gray-100"
+          >
+            Go Back
           </button>
         </div>
       </div>
