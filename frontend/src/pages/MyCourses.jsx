@@ -13,7 +13,7 @@ const MyCourses = () => {
   const fetchMyCourses = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/orders/mycourses",
+        "https://masstudy.onrender.com/orders/mycourses",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ const MyCourses = () => {
                 className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition duration-300"
               >
                 <img
-                  src={`http://localhost:5000/images/${order.course?.image}`}
+                  src={`https://masstudy.onrender.com/images/${order.course?.image}`}
                   alt={order.course?.title}
                   className="w-full h-48 object-cover"
                 />
