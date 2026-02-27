@@ -116,7 +116,7 @@ const Dashboard = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/blog/create",
+        "https://masstudy.onrender.com/blog/create",
         data,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -160,7 +160,7 @@ const Dashboard = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/banner/create",
+        "https://masstudy.onrender.com/banner/create",
         data,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -203,7 +203,7 @@ const Dashboard = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/books/create",
+        "https://masstudy.onrender.com/books/create",
         data,
         {
           headers: { Authorization: `Bearer ${token}`},
@@ -247,7 +247,7 @@ const Dashboard = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/live_course/create",
+        "https://masstudy.onrender.com/live_course/create",
         data,
         {
           headers: { Authorization: `Bearer ${token}`},
@@ -278,7 +278,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/blog/all", {
+        const res = await axios.get("https://masstudy.onrender.com/blog/all", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBlogs(res.data.blogs);
@@ -294,7 +294,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/banner/all", {
+        const res = await axios.get("https://masstudy.onrender.com/banner/all", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBanners(res.data.banners);
@@ -310,7 +310,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/books/all", {
+        const res = await axios.get("https://masstudy.onrender.com/books/all", {
           headers: { Authorization: `Bearer ${token}`},
         });
         setBooks(res.data.books);
@@ -326,7 +326,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchLive_course = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/live_course/all", {
+        const res = await axios.get("https://masstudy.onrender.com/live_course/all", {
           headers: { Authorization: `Bearer ${token}`},
         });
         setLive_course(res.data.live_course);
@@ -342,7 +342,7 @@ const Dashboard = () => {
   const removeBlog = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/blog/delete/${id}`,
+        `https://masstudy.onrender.com/blog/delete/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success(res.data.message);
@@ -357,7 +357,7 @@ const Dashboard = () => {
   const removeBanner = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5000/banner/delete/${id}`,
+        `https://masstudy.onrender.com/banner/delete/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("Banner deleted");
@@ -372,7 +372,7 @@ const Dashboard = () => {
   const removeBooks = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/books/delete/${id}`,
+        `https://masstudy.onrender.com/books/delete/${id}`,
         { headers: { Authorization: `Bearer ${token}`}}
       );
       toast.success(res.data.message);
@@ -387,7 +387,7 @@ const Dashboard = () => {
   const removeLive_course = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/live_course/delete/${id}`,
+        `https://masstudy.onrender.com/live_course/delete/${id}`,
         { headers: { Authorization: `Bearer ${token}` }}
       );
       toast.success(res.data.message);
@@ -484,7 +484,7 @@ const Dashboard = () => {
                   <td className='border p-2'>{b.offPrice}</td>
                   <td className='border p-2'>{b.off}</td>
                   <td className="border p-2">
-                    <img src={`http://localhost:5000/images/${b.image}`} className="w-16 mx-auto" />
+                    <img src={`https://masstudy.onrender.com/images/${b.image}`} className="w-16 mx-auto" />
                   </td>
                   <td className="border p-2">
                     <button onClick={() => removeBlog(b._id)} className="text-red-600 cursor-pointer pl-12"> X</button>
@@ -528,7 +528,7 @@ const Dashboard = () => {
                       <td className="border p-2">{b.description}</td>
                       <td className="border p-2">{b.price}</td>
                       <td className="border p-2">
-                        <img src={`http://localhost:5000/images/${b.image}`} className="w-32 mx-auto" />
+                        <img src={`https://masstudy.onrender.com/images/${b.image}`} className="w-32 mx-auto" />
                       </td>
                       <td className="border p-2">
                         <button onClick={() => removeBanner(b._id)} className="text-red-600">X</button>
@@ -577,7 +577,7 @@ const Dashboard = () => {
                       <td className='border p-2'>{b.price}</td>
                       <td className='border p-2 line-clamp-6 w-50'>{b.amazonUrl}</td>
                       <td className='border p-2'>
-                        <img src={`http://localhost:5000/images/${b.image}`} className='w-32 mx-auto' />
+                        <img src={`https://masstudy.onrender.com/images/${b.image}`} className='w-32 mx-auto' />
                       </td>
                       <td className='border p-2'>
                         <button onClick={() => removeBooks(b._id)} className='text-red-600'>X</button>
@@ -628,7 +628,7 @@ const Dashboard = () => {
                       <td className='border p-2'>{b.beforePrice}</td>
                       <td className='border p-2'>{b.discount}</td>
                       <td className='border p-2'>
-                        <img src={`http://localhost:5000/images/${b.image}`} className='w-32 mx-auto' />
+                        <img src={`https://masstudy.onrender.com/images/${b.image}`} className='w-32 mx-auto' />
                       </td>
                       <td className='border p-2'>
                         <button onClick={() => removeLive_course(b._id)} className='text-red-600'>X</button>
