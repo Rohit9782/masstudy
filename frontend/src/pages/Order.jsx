@@ -194,7 +194,7 @@ const Order = () => {
               ? "Processing..."
               : purchased
               ? "Already Purchased"
-              : "Proceed to Secure Payment"}
+              : "ROhit dharma"}
           </button>
         </div>
       </div>
