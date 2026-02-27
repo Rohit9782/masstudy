@@ -12,7 +12,7 @@ const BlogCard = ({
   off,
   image,
 }) => {
-  const IMAGE_BASE_URL = "http://localhost:5000/images";
+  const IMAGE_BASE_URL = "https://masstudy.onrender.com/images";
   const blogId = id || _id;
 
   return (
