@@ -25,7 +25,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/user/login",
+        "https://masstudy.onrender.com/user/login",
         {
           email: formData.email,
           password: formData.password,

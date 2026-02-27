@@ -29,7 +29,7 @@ const StoreContextProvider = ({ children }) => {
   useEffect(() => {
     const allBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/blog/all");
+        const res = await axios.get("https://masstudy.onrender.com/blog/all");
         setBlogData(res.data.blogs);
       } catch (error) {
         console.log("Error in all blogs api", error);

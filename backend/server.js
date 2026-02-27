@@ -54,7 +54,7 @@ cron.schedule("0 0 * * *", async () => {
 ========================= */
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://masstudy-frontend.onrender.com",
     credentials: true,
   })
 );
